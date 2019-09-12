@@ -3,9 +3,9 @@
 // the Adafruit_LSM303_U.h header, this file is provided to try to minimize
 // issues with projects that depend on the older driver.
 
-#ifndef __ADAFRUIT_LSM303_H__
-#define __ADAFRUIT_LSM303_H__
+#ifndef __LSM303AGR_H__
+#define __LSM303AGR_H__
 
-#include "Adafruit_LSM303_U.h"
+#include "LSM303AGR_U.h"
 
-#endif // __ADAFRUIT_LSM303_H__
+#endif // __LSM303AGR_H__
