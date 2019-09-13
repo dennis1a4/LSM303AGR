@@ -172,20 +172,20 @@ class Adafruit_LSM303_Mag_Unified : public Adafruit_Sensor
   public:
     Adafruit_LSM303_Mag_Unified(int32_t sensorID = -1);
 
-    bool begin(void);
-    void enableAutoRange(bool enable);
+    bool begin(byte ctrlReg);
     void setMagRate(lsm303MagRate rate);
     bool getEvent(sensors_event_t*);
     void getSensor(sensor_t*);
+    
+    void write8(byte address, byte reg, byte value);
+    byte read8(byte address, byte reg);
+    void read(void);
 
     lsm303MagData   raw;     // Last read magnetometer data will be available here
 
   private:
     int32_t         _sensorID;
 
-    void write8(byte address, byte reg, byte value);
-    byte read8(byte address, byte reg);
-    void read(void);
 };
 
 /* Non Unified (old) driver for compatibility reasons */
