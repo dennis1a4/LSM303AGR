@@ -1,7 +1,7 @@
 /***************************************************************************
   This is a library for the LSM303 Accelerometer and magnentometer/compass
 
-  Designed specifically to work with the Adafruit LSM303DLHC Breakout
+  Designed specifically to work with the LSM303AGR
 
   These displays use I2C to communicate, 2 pins are required to interface.
 
@@ -22,13 +22,13 @@
 
 #include <limits.h>
 
-#include "Adafruit_LSM303_U.h"
+#include "LSM303AGR_U.h"
 
 /* enabling this #define will enable the debug print blocks
 #define LSM303_DEBUG
 */
 
-static float _lsm303Accel_MG_LSB     = 0.001F;   // 1, 2, 4 or 12 mg per lsb
+static float _lsm303Accel_MG_LSB     = 0.001F;   // 1, 4 or 16 mg per lsb
 static float _lsm303Mag_Gauss_LSB_XY = 1100.0F;  // Varies with gain
 static float _lsm303Mag_Gauss_LSB_Z  = 980.0F;   // Varies with gain
 
@@ -153,18 +153,18 @@ Adafruit_LSM303_Accel_Unified::Adafruit_LSM303_Accel_Unified(int32_t sensorID) {
     @brief  Setups the HW
 */
 /**************************************************************************/
-bool Adafruit_LSM303_Accel_Unified::begin()
+bool Adafruit_LSM303_Accel_Unified::begin(byte ctrlReg)
 {
   // Enable I2C
   Wire.begin();
 
   // Enable the accelerometer (100Hz)
-  write8(LSM303_ADDRESS_ACCEL, LSM303_REGISTER_ACCEL_CTRL_REG1_A, 0x57);
+  write8(LSM303_ADDRESS_ACCEL, LSM303_REGISTER_ACCEL_CTRL_REG1_A, ctrlReg);
 
-  // LSM303DLHC has no WHOAMI register so read CTRL_REG1_A back to check
+  // LSM303AGR has WHOAMI register so read it back to check
   // if we are connected or not
-  uint8_t reg1_a = read8(LSM303_ADDRESS_ACCEL, LSM303_REGISTER_ACCEL_CTRL_REG1_A);
-  if (reg1_a != 0x57)
+  uint8_t who_am_i_a = read8(LSM303_ADDRESS_ACCEL, LSM303_REGISTER_ACCEL_WHO_AM_I_A);
+  if (who_am_i_a != 0x33)
   {
     return false;
   }
