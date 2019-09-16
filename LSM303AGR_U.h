@@ -159,12 +159,13 @@ class Adafruit_LSM303_Accel_Unified : public Adafruit_Sensor
 
     lsm303AccelData raw;   // Last read accelerometer data will be available here
 
-  private:
-    int32_t         _sensorID;
-
     void write8(byte address, byte reg, byte value);
     byte read8(byte address, byte reg);
     void read(void);
+    
+  private:
+  
+    int32_t         _sensorID;
 };
 
 /* Unified sensor driver for the magnetometer */
