@@ -434,12 +434,12 @@ void Adafruit_LSM303_Mag_Unified::getSensor(sensor_t *sensor) {
 /***************************************************************************
  CONSTRUCTOR
  ***************************************************************************/
-bool Adafruit_LSM303::begin()
+bool Adafruit_LSM303::begin(byte ctrlReg)
 {
   Wire.begin();
 
   // Enable the accelerometer
-  write8(LSM303_ADDRESS_ACCEL, LSM303_REGISTER_ACCEL_CTRL_REG1_A, 0x57);
+  write8(LSM303_ADDRESS_ACCEL, LSM303_REGISTER_ACCEL_CTRL_REG1_A, ctrlReg);
 
   // Enable the magnetometer
   write8(LSM303_ADDRESS_MAG, LSM303_REGISTER_MAG_CFG_REG_A_M, 0x00);
