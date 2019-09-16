@@ -173,7 +173,7 @@ class Adafruit_LSM303_Mag_Unified : public Adafruit_Sensor
   public:
     Adafruit_LSM303_Mag_Unified(int32_t sensorID = -1);
 
-    bool begin(byte ctrlReg);
+    bool begin(void);
     void setMagRate(lsm303MagRate rate);
     bool getEvent(sensors_event_t*);
     void getSensor(sensor_t*);
