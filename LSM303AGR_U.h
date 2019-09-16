@@ -152,7 +152,7 @@ class Adafruit_LSM303_Accel_Unified : public Adafruit_Sensor
   public:
     Adafruit_LSM303_Accel_Unified(int32_t sensorID = -1);
 
-    bool begin(void);
+    bool begin(byte ctrlReg);
     bool getEvent(sensors_event_t*);
     void getSensor(sensor_t*);
 
@@ -192,7 +192,7 @@ class Adafruit_LSM303_Mag_Unified : public Adafruit_Sensor
 class Adafruit_LSM303
 {
   public:
-    bool begin(void);
+    bool begin(byte ctrlReg);
     void read(void);
 
     lsm303AccelData accelData;    // Last read accelerometer data will be available here
